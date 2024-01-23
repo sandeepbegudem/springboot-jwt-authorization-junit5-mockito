@@ -1,0 +1,1 @@
+package com.sandeepbegudem.customer.payments.service.repository;import com.sandeepbegudem.customer.payments.service.entity.Payment;import org.springframework.data.jpa.repository.JpaRepository;public interface PaymentsRepository extends JpaRepository<Payment, Integer> {}

@@ -134,6 +134,7 @@ class CustomerServiceTest {
                 "colorado",
                 null);
 
+
         // Mock the calls
         when(customerRepository.findById(customer.getId()))
                 .thenReturn(Optional.of(customer));
@@ -163,6 +164,7 @@ class CustomerServiceTest {
         verify(customerMapper, times(1)).entityToDto(customer);
         verify(customerMapper, atLeastOnce()).entityToDto(customer);
     }
+
     @Test
     public void should_update_customer() throws Exception {
 
@@ -208,4 +210,5 @@ class CustomerServiceTest {
         assertEquals(customer.getCity(), updatedCustomer.getCity());
         assertEquals(customer.getState(), updatedCustomer.getState());
     }
+
 }

@@ -1,0 +1,1 @@
+# define base docker imageFROM temurin:17LABEL maintainer="sandeep"ADD target/customer-payments-service-0.0.1-SNAPSHOT.jar customer-payments.jarENTRYPOINT ["java", "-jar", "customer-payments.jar"]

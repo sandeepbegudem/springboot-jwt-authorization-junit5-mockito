@@ -6,7 +6,6 @@ import com.sandeepbegudem.customer.payments.service.mapper.CustomerMapper;
 import com.sandeepbegudem.customer.payments.service.repository.CustomerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,28 +32,26 @@ class CustomerServiceTest {
     }
 
     @Test
-    public void should_save_a_customer(){
+    public void should_save_a_customer() throws Exception {
     // Given
 
-        CustomerPaymentsRequest request = new CustomerPaymentsRequest();
-        request.setId(1);
-        request.setFirstname("john");
-        request.setLastname("doe");
-        request.setAge(21);
-        request.setAddress("123 main st");
-        request.setCity("sanjose");
-        request.setState("california");
-        request.setPayments(null);
+        CustomerPaymentsRequest request = new CustomerPaymentsRequest(1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "sanjose",
+                "california",
+                null);
 
-        Customer customer = new Customer();
-        customer.setId(1);
-        customer.setFirstname("john");
-        customer.setLastname("doe");
-        customer.setAge(21);
-        customer.setAddress("123 main st");
-        customer.setCity("sanjose");
-        customer.setState("california");
-        customer.setPayments(null);
+        Customer customer = new Customer(1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "sanjose",
+                "california",
+                null);
 
         when(customerMapper.dtoToEntity(request)).thenReturn(customer);
         when(customerRepository.save(customer)).thenReturn(customer);
@@ -63,7 +60,6 @@ class CustomerServiceTest {
         Customer savedCustomer = customerService.saveCustomer(request);
         CustomerPaymentsRequest customerRequest = customerMapper.entityToDto(savedCustomer);
 
-        System.out.println(savedCustomer.toString());
         Customer customerResponse = customerRepository.save(savedCustomer);
 
         // Then
@@ -79,7 +75,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    public void should_get_all_customers(){
+    public void should_get_all_customers() throws Exception {
 
         // Given
         List<Customer> cr = new ArrayList<>();
@@ -127,17 +123,16 @@ class CustomerServiceTest {
 
     }
     @Test
-    public void should_retrieve_a_customer_by_Id(){
+    public void should_retrieve_a_customer_by_Id() throws Exception {
 
-        Customer customer = new Customer();
-        customer.setId(1);
-        customer.setFirstname("john");
-        customer.setLastname("doe");
-        customer.setAge(21);
-        customer.setAddress("123 main st");
-        customer.setCity("denver");
-        customer.setState("colorado");
-        customer.setPayments(null);
+        Customer customer = new Customer(1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "denver",
+                "colorado",
+                null);
 
         // Mock the calls
         when(customerRepository.findById(customer.getId()))
@@ -167,5 +162,50 @@ class CustomerServiceTest {
         verify(customerRepository, times(1)).findById(customer.getId());
         verify(customerMapper, times(1)).entityToDto(customer);
         verify(customerMapper, atLeastOnce()).entityToDto(customer);
+    }
+    @Test
+    public void should_update_customer() throws Exception {
+
+        Integer customerId = 1;
+
+        CustomerPaymentsRequest request = new CustomerPaymentsRequest(1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "denver",
+                "colorado",
+                null);
+
+       Customer customer = new Customer(
+                1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "denver",
+                "colorado",
+                null);
+
+        when(customerRepository.findById(request.getId())).thenReturn(Optional.of(customer));
+        when(customerMapper.dtoToEntity(request)).thenReturn(customer);
+        when(customerRepository.save(customer)).thenReturn(new Customer(1,
+                "john",
+                "doe",
+                21,
+                "123 main st",
+                "denver",
+                "colorado",
+                null));
+
+        Customer updatedCustomer = customerService.updateCustomer(request, customer.getId());
+
+        assertEquals(request.getId(), updatedCustomer.getId());
+        assertEquals(customer.getFirstname(), updatedCustomer.getFirstname());
+        assertEquals(customer.getLastname(), updatedCustomer.getLastname());
+        assertEquals(customer.getAge(), updatedCustomer.getAge());
+        assertEquals(customer.getAddress(), updatedCustomer.getAddress());
+        assertEquals(customer.getCity(), updatedCustomer.getCity());
+        assertEquals(customer.getState(), updatedCustomer.getState());
     }
 }

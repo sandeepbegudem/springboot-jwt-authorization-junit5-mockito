@@ -16,8 +16,12 @@ import java.util.Optional;
 @RequestMapping("/api/v1/payments")
 public class PaymentController {
 
+    private final PaymentService service;
+
     @Autowired
-    private PaymentService service;
+    public PaymentController(PaymentService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Payment> insertPayment(@RequestBody PaymentDto dto){

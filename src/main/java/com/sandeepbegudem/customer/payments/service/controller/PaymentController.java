@@ -20,8 +20,8 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @Autowired
-    public PaymentController(PaymentService service) {
-        this.service = service;
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
 
     @PostMapping

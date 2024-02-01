@@ -16,7 +16,8 @@ import java.util.Optional;
 @RequestMapping("/api/v1/payments")
 public class PaymentController {
 
-    private final PaymentService service;
+    @Autowired
+    private final PaymentService paymentService;
 
     @Autowired
     public PaymentController(PaymentService service) {
@@ -25,16 +26,16 @@ public class PaymentController {
 
     @PostMapping
     public ResponseEntity<Payment> insertPayment(@RequestBody PaymentDto dto){
-        return new ResponseEntity<>(service.savePayment(dto), HttpStatus.CREATED);
+        return new ResponseEntity<>(paymentService.savePayment(dto), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<PaymentDto>> getAllPayments(){
-        return new ResponseEntity<>(service.getAllPayments(), HttpStatus.OK);
+        return new ResponseEntity<>(paymentService.getAllPayments(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<PaymentDto>> paymentsById(@PathVariable int id){
-        return new ResponseEntity<>(service.getPaymentById(id), HttpStatus.OK);
+        return new ResponseEntity<>(paymentService.getPaymentById(id), HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.sandeepbegudem.customer.payments.service.controller;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
+import com.sandeepbegudem.customer.payments.service.dto.JwtRequest;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -34,8 +36,19 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerPaymentsRequest> retieveCustomerById(@PathVariable Integer id){
+    public ResponseEntity<CustomerPaymentsRequest> retrieveCustomerById(@PathVariable Integer id){
 
         return new ResponseEntity<>(customerService.customerById(id), HttpStatus.OK);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteCustomerById(@PathVariable Integer id) {
+        if (id == null) {
+            throw new RuntimeException("id: " + " not found");
+        }
+        else
+            customerService.deleteCustomerById(id);
+    }
+
 }

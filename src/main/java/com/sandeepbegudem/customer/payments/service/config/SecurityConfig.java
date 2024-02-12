@@ -51,7 +51,7 @@ public class SecurityConfig {
 
 
 // use this to skip BCryptPasswordEncoder
-    @Bean
+//    @Bean
 //    public PasswordEncoder passwordEncoder() {
 //        return NoOpPasswordEncoder.getInstance();
 //    }

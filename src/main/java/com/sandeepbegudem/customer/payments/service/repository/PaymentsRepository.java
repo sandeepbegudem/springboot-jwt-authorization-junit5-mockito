@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface PaymentsRepository extends JpaRepository<Payment, Integer> {
 
+
     @Transactional
     @Query(value = "SELECT DISTINCT p.paymentId, p.paymentAmount, p.paymentDate, p.paymentMode," +
             " p.paymentTargetEntity, p.paymentType, p.customer_payments_fk FROM Payment p JOIN p.customer_payments_fk c")

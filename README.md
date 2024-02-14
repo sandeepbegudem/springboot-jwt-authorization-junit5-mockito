@@ -1,4 +1,4 @@
-# Junit5-mockito-spring-boot3.x-jwt
+# Junit5-mockito-spring-boot3.x-jwt authorization
 
 ## Dependencies:
 

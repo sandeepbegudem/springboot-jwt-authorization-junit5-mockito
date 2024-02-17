@@ -1,6 +1,5 @@
 package com.sandeepbegudem.customer.payments.service.service;
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
-import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.mapper.CustomerMapper;
 import com.sandeepbegudem.customer.payments.service.repository.CustomerRepository;

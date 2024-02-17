@@ -1,5 +1,6 @@
 package com.sandeepbegudem.customer.payments.service.service;
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
+import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.mapper.CustomerMapper;
 import com.sandeepbegudem.customer.payments.service.repository.CustomerRepository;
@@ -18,14 +19,14 @@ public class CustomerService {
     private CustomerMapper mapper;
 
     // retrieve all customers
-    public List<CustomerPaymentsRequest> getAllCustomers(){
-        List<CustomerPaymentsRequest> customerPaymentsRequests = customerRepository
-                .findAll()
-                .parallelStream()
-                .map(m -> mapper.entityToDto(m))
-                .collect(Collectors.toList());
-        return customerPaymentsRequests;
-    }
+//    public List<CustomerPaymentsRequest> getAllCustomers(){
+//        List<CustomerPaymentsRequest> customerPaymentsRequests = customerRepository
+//                .findAll()
+//                .parallelStream()
+//                .map(m -> mapper.entityToDto(m))
+//                .collect(Collectors.toList());
+//        return customerPaymentsRequests;
+//    }
 
     // save a customer
     public Customer saveCustomer(CustomerPaymentsRequest customerPaymentsRequest) {
@@ -35,8 +36,14 @@ public class CustomerService {
     }
 
     // retrieve a customer by id
-    public CustomerPaymentsRequest customerById(Integer id){
-        Customer customer = customerRepository.findById(id).orElse(null);
+//    public CustomerPaymentsRequest customerById(Integer id){
+//        Customer customer = customerRepository.findById(id).orElse(null);
+//        CustomerPaymentsRequest customerPaymentsRequest = mapper.entityToDto(customer);
+//        return customerPaymentsRequest;
+//    }
+
+    public CustomerPaymentsRequest customerById(int id){
+        Customer customer = customerRepository.findCustomerById(id);
         CustomerPaymentsRequest customerPaymentsRequest = mapper.entityToDto(customer);
         return customerPaymentsRequest;
     }
@@ -50,13 +57,21 @@ public class CustomerService {
     }
 
     // delete customer
-    public void deleteCustomerById(int id){
+    public void deleteCustomerById(int id) {
         Customer customer = customerRepository.findById(id).orElse(null);
-        if (customer.getId() == null){
+        if (customer.getId() == null) {
             throw new RuntimeException("resource: not found" + id);
         }
         else
             customerRepository.deleteById(customer.getId());
+    }
+
+    public List<CustomerPaymentsRequest> getAllCustomersUsingCustomJPQL() {
+
+       return customerRepository.findAllCustomers()
+               .stream()
+               .map(customer -> mapper.entityToDto(customer))
+               .collect(Collectors.toList());
     }
 
 }

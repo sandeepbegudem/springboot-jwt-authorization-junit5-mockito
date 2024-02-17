@@ -111,7 +111,7 @@ class CustomerServiceTest {
                 null));
 
         // When
-        customerService.getAllCustomers();
+        customerService.getAllCustomersUsingCustomJPQL();
 
         // Then
         assertEquals(cr.get(0).getId(), crReq.getId());

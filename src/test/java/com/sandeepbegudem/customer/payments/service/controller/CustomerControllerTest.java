@@ -114,7 +114,7 @@ class CustomerControllerTest {
                 "colorado", null);
 
 
-        when(customerService.getAllCustomers()).thenReturn(dto);
+        when(customerService.getAllCustomersUsingCustomJPQL()).thenReturn(dto);
         ResultActions result = mockMvc.perform(get("/api/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(customer)));

@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -30,12 +31,12 @@ public class CustomerController {
         this.authenticationManager = authenticationManager;
     }
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<CustomerPaymentsRequest>> retrieveAllCustomers(){
-
-        return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
-    }
+//    @GetMapping
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    public ResponseEntity<List<CustomerPaymentsRequest>> retrieveAllCustomers(){
+//
+//        return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
+//    }
 
     @PostMapping
     @PreAuthorize("hasAuthority('USER')")
@@ -46,7 +47,7 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<CustomerPaymentsRequest> retrieveCustomerById(@PathVariable Integer id){
+    public ResponseEntity<CustomerPaymentsRequest> retrieveCustomerById(@PathVariable int id){
 
         return new ResponseEntity<>(customerService.customerById(id), HttpStatus.OK);
     }
@@ -59,5 +60,12 @@ public class CustomerController {
         }
         else
             customerService.deleteCustomerById(id);
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<List<CustomerPaymentsRequest>> getAllCustomersByJPQL(){
+
+        return new ResponseEntity<>(customerService.getAllCustomersUsingCustomJPQL(), HttpStatus.OK);
     }
 }

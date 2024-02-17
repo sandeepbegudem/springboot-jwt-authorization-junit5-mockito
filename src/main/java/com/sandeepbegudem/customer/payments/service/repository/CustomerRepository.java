@@ -3,6 +3,7 @@ package com.sandeepbegudem.customer.payments.service.repository;
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
 import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
+    @Transactional
     @Query("SELECT customer FROM Customer customer")
     List<Customer> findAllCustomers();
 
+    @Transactional
     @Query("SElECT customer FROM Customer customer WHERE customer.id= :id")
     Customer findCustomerById(int id);
 

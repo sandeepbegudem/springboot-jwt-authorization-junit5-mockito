@@ -1,7 +1,6 @@
 package com.sandeepbegudem.customer.payments.service.repository;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
-import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

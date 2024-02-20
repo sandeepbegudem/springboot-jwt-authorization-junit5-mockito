@@ -24,4 +24,4 @@ out/
 *.iml
 
 # Ignore github workflows
-.github/workflows
+.github/workflows/

@@ -1,6 +1,7 @@
 package com.sandeepbegudem.customer.payments.service.service;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
+import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.mapper.CustomerMapper;
 import com.sandeepbegudem.customer.payments.service.repository.CustomerRepository;
@@ -57,10 +58,10 @@ class CustomerServiceTest {
         when(customerRepository.save(customer)).thenReturn(customer);
 
         // When
-        Customer savedCustomer = customerService.saveCustomer(request);
-        CustomerPaymentsRequest customerRequest = customerMapper.entityToDto(savedCustomer);
+       CustomerResponse customerResponse = customerService.saveCustomer(request);
+       CustomerPaymentsRequest customerRequest = customerMapper.entityToDto(customer);
 
-        Customer customerResponse = customerRepository.save(savedCustomer);
+        Customer savedCustomer = customerRepository.save(customer);
 
         // Then
         assertEquals(request.getId(), customerResponse.getId());
@@ -134,7 +135,6 @@ class CustomerServiceTest {
                 "colorado",
                 null);
 
-
         // Mock the calls
         when(customerRepository.findById(customer.getId()))
                 .thenReturn(Optional.of(customer));
@@ -148,7 +148,7 @@ class CustomerServiceTest {
                         "colorado",
                         null));
 
-        CustomerPaymentsRequest custResponse = customerService.customerById(customer.getId());
+        CustomerResponse custResponse = customerService.customerById(customer.getId());
 
         assertEquals(customer.getId(), custResponse.getId());
         assertEquals(customer.getFirstname(), custResponse.getFirstname());
@@ -164,7 +164,6 @@ class CustomerServiceTest {
         verify(customerMapper, times(1)).entityToDto(customer);
         verify(customerMapper, atLeastOnce()).entityToDto(customer);
     }
-
     @Test
     public void should_update_customer() throws Exception {
 
@@ -210,5 +209,4 @@ class CustomerServiceTest {
         assertEquals(customer.getCity(), updatedCustomer.getCity());
         assertEquals(customer.getState(), updatedCustomer.getState());
     }
-
 }

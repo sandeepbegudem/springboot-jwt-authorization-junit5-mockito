@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "minor-tweaks" ]
+    branches: [ "minor-tweaks-1" ]
   pull_request:
-    branches: [ "minor-tweaks" ]
+    branches: [ "minor-tweaks-1" ]
 
 jobs:
   build:

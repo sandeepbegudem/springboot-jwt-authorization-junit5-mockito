@@ -1,6 +1,7 @@
 package com.sandeepbegudem.customer.payments.service.controller;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
+import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.service.CustomerService;
 import com.sandeepbegudem.customer.payments.service.service.JwtService;
@@ -31,6 +32,13 @@ public class CustomerController {
         this.authenticationManager = authenticationManager;
     }
 
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<List<CustomerResponse>> getAllCustomers(){
+
+        return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
+    }
+
 //    @GetMapping
 //    @PreAuthorize("hasAuthority('ADMIN')")
 //    public ResponseEntity<List<CustomerPaymentsRequest>> retrieveAllCustomers(){
@@ -40,32 +48,26 @@ public class CustomerController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<Customer> insertCustomer(@RequestBody CustomerPaymentsRequest request){
+    public ResponseEntity<CustomerResponse> insertCustomer(@RequestBody CustomerPaymentsRequest request){
 
         return new ResponseEntity<>(customerService.saveCustomer(request), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<CustomerPaymentsRequest> retrieveCustomerById(@PathVariable int id){
+    public ResponseEntity<CustomerResponse> retrieveCustomerById(@PathVariable int id){
 
         return new ResponseEntity<>(customerService.customerById(id), HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteCustomerById(@PathVariable Integer id) {
         if (id == null) {
             throw new RuntimeException("id: " + " not found");
         }
         else
             customerService.deleteCustomerById(id);
-    }
-
-    @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<CustomerPaymentsRequest>> getAllCustomersByJPQL(){
-
-        return new ResponseEntity<>(customerService.getAllCustomersUsingCustomJPQL(), HttpStatus.OK);
     }
 }

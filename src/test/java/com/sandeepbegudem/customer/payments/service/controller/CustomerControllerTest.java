@@ -2,6 +2,7 @@ package com.sandeepbegudem.customer.payments.service.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
+import com.sandeepbegudem.customer.payments.service.dto.CustomerResponse;
 import com.sandeepbegudem.customer.payments.service.entity.Customer;
 import com.sandeepbegudem.customer.payments.service.service.CustomerService;
 import org.hamcrest.CoreMatchers;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -42,7 +44,7 @@ class CustomerControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void insertCustomer_ShouldReturn_Status_201_Created() throws Exception{
+    public void insertCustomer_ShouldReturn_Status_201_Created() throws Exception {
 
         CustomerPaymentsRequest dto = new CustomerPaymentsRequest(
                 1,
@@ -54,7 +56,7 @@ class CustomerControllerTest {
                 "colorado",
                 null);
 
-        Customer customer = new Customer(1,
+        CustomerResponse customerResponse = new CustomerResponse(1,
                 "john",
                 "doe",
                 21,
@@ -65,8 +67,8 @@ class CustomerControllerTest {
         BDDMockito.given(customerService.saveCustomer(
                 ArgumentMatchers
                         .any()))
-                .willReturn(customer)
-                .willAnswer(invocationOnMock -> invocationOnMock.getArguments());
+                .willReturn(customerResponse)
+                .willAnswer(InvocationOnMock::getArguments);
         ResultActions result = mockMvc.perform(post("/api/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)));
@@ -86,7 +88,7 @@ class CustomerControllerTest {
     @Test
     public void should_return_Customers_List() throws Exception {
 
-        List<CustomerPaymentsRequest> dto = Arrays.asList(new CustomerPaymentsRequest(
+        List<CustomerResponse> dto = Arrays.asList(new CustomerResponse(
                 1,
                 "john",
                 "doe",
@@ -95,7 +97,7 @@ class CustomerControllerTest {
                 "denver",
                 "colorado",
                 null),
-                new CustomerPaymentsRequest(
+                new CustomerResponse(
                         21,
                         "john",
                         "cena",
@@ -114,7 +116,7 @@ class CustomerControllerTest {
                 "colorado", null);
 
 
-        when(customerService.getAllCustomersUsingCustomJPQL()).thenReturn(dto);
+        when(customerService.getAllCustomers()).thenReturn(dto);
         ResultActions result = mockMvc.perform(get("/api/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(customer)));
@@ -127,7 +129,7 @@ class CustomerControllerTest {
     @Test
     public void should_retrieve_customerById() throws Exception {
 
-        CustomerPaymentsRequest dto = new CustomerPaymentsRequest(
+        CustomerResponse response = new CustomerResponse(
                 21,
                 "john",
                 "doe",
@@ -137,14 +139,14 @@ class CustomerControllerTest {
                 "colorado",
                 null);
 
-        when(customerService.customerById(dto.getId())).thenReturn(dto);
+        when(customerService.customerById(response.getId())).thenReturn(response);
                 ResultActions result = mockMvc.perform(get("/api/v1/customers/21")
                 .contentType(MediaType.APPLICATION_JSON)
                                 .param("id", String.valueOf(21))
-               .content(objectMapper.writeValueAsString(dto)));
+               .content(objectMapper.writeValueAsString(response)));
 
         result.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstname", CoreMatchers.is(dto.getFirstname())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstname", CoreMatchers.is(response.getFirstname())))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

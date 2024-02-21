@@ -3,10 +3,7 @@ package com.sandeepbegudem.customer.payments.service.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -15,7 +12,8 @@ import java.util.Date;
 
 //@AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 public class Payment implements Serializable {
 
@@ -27,7 +25,7 @@ public class Payment implements Serializable {
 
     private String paymentTargetEntity;
     private BigDecimal paymentAmount;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "hh:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "hh:mm:ss")

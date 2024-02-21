@@ -1,3 +1,4 @@
+
 package com.sandeepbegudem.customer.payments.service.security;
 
 import jakarta.servlet.ServletException;
@@ -21,3 +22,4 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     }
 
 }
+

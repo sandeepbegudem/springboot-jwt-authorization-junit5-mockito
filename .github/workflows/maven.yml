@@ -11,9 +11,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "validation-changes" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "validation-changes" ]
+    branches: [ "main" ]
 
 jobs:
   build:

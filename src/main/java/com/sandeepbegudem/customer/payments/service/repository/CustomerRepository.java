@@ -1,4 +1,3 @@
-
 package com.sandeepbegudem.customer.payments.service.repository;
 
 
@@ -24,4 +23,3 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Transactional
    void deleteCustomerById(int id);
 }
-

@@ -15,4 +15,3 @@
 #### Jacoco
 #### Devtools
 #### Starter Web
->>>>>>> minor-tweaks

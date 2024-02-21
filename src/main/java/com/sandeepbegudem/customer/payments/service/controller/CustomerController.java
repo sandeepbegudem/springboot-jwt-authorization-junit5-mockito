@@ -1,4 +1,3 @@
-
 package com.sandeepbegudem.customer.payments.service.controller;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
@@ -59,4 +58,3 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
     }
 }
-

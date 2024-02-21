@@ -1,0 +1,1 @@
+package com.sandeepbegudem.customer.payments.service.entity;public enum PaymentType {    PAYMENT,    REFUND}

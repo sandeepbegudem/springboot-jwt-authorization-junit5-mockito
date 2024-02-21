@@ -1,0 +1,1 @@
+package com.sandeepbegudem.customer.payments.service.dto;import lombok.*;@Setter@Getter@AllArgsConstructor@NoArgsConstructor@Builderpublic class JwtRequest {    private String username;    private String password;}

@@ -1,11 +1,9 @@
-
 package com.sandeepbegudem.customer.payments.service.service;
 
 import com.sandeepbegudem.customer.payments.service.dto.JwtRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoder;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +17,6 @@ import java.util.function.Function;
 
 @Component
 public class JwtService {
-
 
     private static final String SECRET = "hE+kRq7H0sYV8eYaXH7NWtb7s1Ez1LTrjxeOuWV6HLQUOY60eGBdWPBKzyUrTjFkc8R0oYjVR7D61OAs6INEADvfcPOcr5QRR4RJtalLyfBdOPURmjzcExqJaHi2rkeNu8njIWam11ax6vvYD/1ouiSgdoQH8YH2ussOlBTvoQu1N+OUXLIMaJNNlZwrKPA";
 

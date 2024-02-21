@@ -1,7 +1,9 @@
-# Junit5-mockito-spring-boot3.x-jwt authorization
+
+# spring-boot3.x-jwt authorization-junit5-mockito
 
 ## Dependencies:
 
+#### Java 17
 #### Spring Boot 3.1.0,
 #### Spring Data Jpa
 #### Mysql

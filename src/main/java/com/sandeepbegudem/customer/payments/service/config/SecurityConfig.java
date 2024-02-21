@@ -1,3 +1,4 @@
+
 package com.sandeepbegudem.customer.payments.service.config;
 
 
@@ -50,16 +51,16 @@ public class SecurityConfig {
     }
 
 
-// use this to skip BCryptPasswordEncoder
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-
+ // use this to skip BCryptPasswordEncoder
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){

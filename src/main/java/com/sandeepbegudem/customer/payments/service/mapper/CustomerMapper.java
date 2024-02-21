@@ -103,4 +103,17 @@ public class CustomerMapper {
                 customerResponse.getPayments());
     }
 
+    public static CustomerResponse apply(Customer customer) {
+        return new CustomerResponse(
+                customer.getId(),
+                customer.getFirstname(),
+                customer.getLastname(),
+                customer.getAge(),
+                customer.getAddress(),
+                customer.getCity(),
+                customer.getState(),
+                customer.getPayments()
+        );
+    }
+
 }

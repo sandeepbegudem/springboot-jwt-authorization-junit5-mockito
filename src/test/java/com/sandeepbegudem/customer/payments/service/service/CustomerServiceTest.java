@@ -1,3 +1,4 @@
+
 package com.sandeepbegudem.customer.payments.service.service;
 
 import com.sandeepbegudem.customer.payments.service.dto.CustomerPaymentsRequest;
@@ -210,3 +211,4 @@ class CustomerServiceTest {
         assertEquals(customer.getState(), updatedCustomer.getState());
     }
 }
+

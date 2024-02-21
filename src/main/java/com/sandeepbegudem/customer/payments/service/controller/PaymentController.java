@@ -1,8 +1,8 @@
+
 package com.sandeepbegudem.customer.payments.service.controller;
 
 import com.sandeepbegudem.customer.payments.service.dto.PaymentDto;
 import com.sandeepbegudem.customer.payments.service.entity.Payment;
-import com.sandeepbegudem.customer.payments.service.repository.PaymentsRepository;
 import com.sandeepbegudem.customer.payments.service.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,25 +16,26 @@ import java.util.Optional;
 @RequestMapping("/api/v1/payments")
 public class PaymentController {
 
-    private final PaymentService paymentService;
+    private final PaymentService service;
 
     @Autowired
-    public PaymentController(PaymentService paymentService) {
-        this.paymentService = paymentService;
+    public PaymentController(PaymentService service) {
+        this.service = service;
     }
 
     @PostMapping
     public ResponseEntity<Payment> insertPayment(@RequestBody PaymentDto dto){
-        return new ResponseEntity<>(paymentService.savePayment(dto), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.savePayment(dto), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<PaymentDto>> getAllPayments(){
-        return new ResponseEntity<>(paymentService.getAllPayments(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllPayments(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<PaymentDto>> paymentsById(@PathVariable int id){
-        return new ResponseEntity<>(paymentService.getPaymentById(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.getPaymentById(id), HttpStatus.OK);
     }
 }
+

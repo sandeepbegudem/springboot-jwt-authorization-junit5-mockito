@@ -1,1 +1,1 @@
-package com.sandeepbegudem.customer.payments.service.dto;import lombok.*;@Setter@Getter@AllArgsConstructor@NoArgsConstructor@Builder@ToStringpublic class JwtResponse {    private String token;    private String username;}
+package com.sandeepbegudem.customer.payments.service.dto;import lombok.*;@Setter@Getter@AllArgsConstructor@NoArgsConstructor@Builderpublic class JwtResponse {    private String token;    private String username;}

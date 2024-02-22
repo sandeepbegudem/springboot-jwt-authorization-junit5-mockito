@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-server:
-  port: 6789
 
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/customer_payments
-    username: root
-    password: user123
-
-  jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
-
-    #url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}
-    #username: ${MYSQLUSER}
-    #password: ${MYSQLPASSWORD}
-=======
-#server:#  port: 5473logging:  level:    org.springframework.security: TRACEspring:  datasource:    driverClassName: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://localhost:3306/customer_payments    username: root    password: user1234    #url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}    #username: ${MYSQLUSER}    #password: ${MYSQLPASSWORD}  jpa:    hibernate.ddl-auto: update    generate-ddl: true    show-sql: true
->>>>>>> minor-tweaks
+  profiles:
+    active: prod

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # springboot-jwt-authorization-junit5-mockito
 
@@ -17,7 +16,6 @@
 #### Jacoco
 #### Devtools
 #### Starter Web
-
 
 
 ## Links:

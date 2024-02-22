@@ -1,3 +1,4 @@
+
 package com.sandeepbegudem.customer.payments.service.service;
 
 import com.sandeepbegudem.customer.payments.service.dto.JwtRequest;
@@ -6,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +20,8 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
-    private static final String SECRET = "hE+kRq7H0sYV8eYaXH7NWtb7s1Ez1LTrjxeOuWV6HLQUOY60eGBdWPBKzyUrTjFkc8R0oYjVR7D61OAs6INEADvfcPOcr5QRR4RJtalLyfBdOPURmjzcExqJaHi2rkeNu8njIWam11ax6vvYD/1ouiSgdoQH8YH2ussOlBTvoQu1N+OUXLIMaJNNlZwrKPA";
+    @Value("${client.secret}")
+    private String CLIENT_SECRET;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -51,7 +54,6 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-
     public String generateToken(JwtRequest jwtRequest){
         Map<String,Object> claims=new HashMap<>();
         return createToken(claims, jwtRequest.getUsername());
@@ -67,7 +69,8 @@ public class JwtService {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes= Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes= Decoders.BASE64.decode(CLIENT_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
+

@@ -1,0 +1,1 @@
+package com.sandeepbegudem.customer.payments.service.config;public class OpenAPIConfig {}

@@ -1,5 +1,5 @@
 
-# springboot-jwt authorization-junit5-mockito
+# springboot-jwt-authorization-junit5-mockito
 
 ## Project Details:
 
@@ -10,10 +10,16 @@
 #### Spring Starter Security
 #### Json Web Token (JWT)
 #### Lombok
-#### springdoc-openapi-starter-webmvc-ui
+#### Openapi Starter Webmvc UI
 #### Junit5
 #### Mockito
 #### Jacoco
 #### Devtools
 #### Starter Web
+
+
+
+## Links:
+
+#### Project API Documentation: http://localhost:6789/swagger-ui/index.html#/
 
